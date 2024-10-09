@@ -1,0 +1,1 @@
+Create Docker Container : "docker run --name artistarea -e POSTGRES_USER=monochromeboy -e POSTGRES_PASSWORD=anuan -e POSTGRES_DB=db_artistarea -p 5432:5432 -d postgres"
