@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 app.use(bodyParser.json());
 
 // Endpoint untuk mendaftar pengguna
-app.post("/register", async (req, res) => {
+app.post("/user/register", async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
@@ -41,7 +41,7 @@ app.post("/register", async (req, res) => {
 });
 
 // Endpoint untuk mendapatkan pengguna berdasarkan ID
-app.get("/users/:id", async (req, res) => {
+app.get("/user/:id", async (req, res) => {
   const userId = parseInt(req.params.id); // Mendapatkan ID dari URL
 
   try {
