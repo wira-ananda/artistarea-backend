@@ -8,13 +8,13 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   name      String
-  email     String   @unique
+  email     String    @unique
   password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  // artworks  Artwork[] // Relasi dengan karya seni
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  artworks  Artwork[] // Relasi dengan karya seni
   follows   Follow[] // Relasi dengan seniman yang diikuti
   likes     Like[] // Relasi dengan karya yang disukai
 }
@@ -42,6 +42,8 @@ model Artwork {
   artistId    Int
   likes       Like[] // Relasi dengan like
   insights    Insight[] // Relasi dengan insight
+  User        User?     @relation(fields: [userId], references: [id])
+  userId      Int?
 }
 
 model Like {
