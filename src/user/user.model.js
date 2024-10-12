@@ -23,6 +23,11 @@ const userExist = existingCheck.existingUser;
 const createNew = {
   newUser: async (userData, res) => {
     const { name, email, password } = userData;
+    if (!name || !email || !password) {
+      return res
+        .status(400)
+        .send({ message: "Username, Email, or Password is required" });
+    }
     const newUser = await prisma.user.create({
       data: {
         name,
