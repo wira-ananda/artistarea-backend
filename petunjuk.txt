@@ -1,1 +1,11 @@
 Create Docker Container : "docker run --name artistarea -e POSTGRES_USER=monochromeboy -e POSTGRES_PASSWORD=anuan -e POSTGRES_DB=db_artistarea -p 5432:5432 -d postgres"
+
+Berikut penjelasannya:
+
+docker run: Perintah ini akan membuat kontainer baru dari image yang ditentukan (dalam hal ini, image PostgreSQL).
+--name artistarea: Memberikan nama artistarea pada kontainer baru yang akan dibuat.
+-e POSTGRES_USER=monochromeboy: Mengatur variabel lingkungan untuk pengguna PostgreSQL.
+-e POSTGRES_PASSWORD=anuan: Mengatur kata sandi PostgreSQL.
+-e POSTGRES_DB=db_artistarea: Membuat database dengan nama db_artistarea.
+-p 5432:5432: Port forwarding, menghubungkan port di host dengan port di kontainer.
+-d: Menjalankan kontainer di background (detached mode).
