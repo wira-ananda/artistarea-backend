@@ -9,3 +9,5 @@ docker run: Perintah ini akan membuat kontainer baru dari image yang ditentukan 
 -e POSTGRES_DB=db_artistarea: Membuat database dengan nama db_artistarea.
 -p 5432:5432: Port forwarding, menghubungkan port di host dengan port di kontainer.
 -d: Menjalankan kontainer di background (detached mode).
+
+Menjalankan yang sdh ada : 'docker start artistarea'
