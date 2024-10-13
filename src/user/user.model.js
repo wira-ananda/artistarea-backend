@@ -52,16 +52,22 @@ const createUser = createNew.newUser;
 
 const searching = {
   searchUserById: async (req, res, userId, findUserMethod, key) => {
-    const data = req.body;
-
-    const user = await findUserMethod(
-      key == "patch" || key == "put"
-        ? {
-            where: { id: userId },
-            data: data,
-          }
-        : { where: { id: userId } }
-    );
+    if (key === "patch") {
+      const data = req.body;
+      user = await findUserMethod({
+        where: { id: userId },
+        data: data,
+      });
+    } else if (key === "put") {
+      const { name, email, password } = req.body;
+      user = await findUserMethod({
+        where: { id: userId },
+        data: { name, email, password },
+      });
+    } else {
+      const data = req.body;
+      user = await findUserMethod({ where: { id: userId } });
+    }
 
     if (!user) {
       return res.status(404).send({ message: "user not found" });

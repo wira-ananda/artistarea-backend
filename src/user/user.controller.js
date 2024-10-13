@@ -55,4 +55,16 @@ user.patch("/:id", async (req, res) => {
   }
 });
 
+user.put("/:id", async (req, res) => {
+  const userId = parseInt(req.params.id);
+  const key = "put";
+
+  try {
+    await searchUserById(req, res, userId, update, key);
+  } catch (error) {
+    const isi = "Failed";
+    errorMassage(error, isi, res);
+  }
+});
+
 module.exports = user;
