@@ -3,6 +3,6 @@ const prisma = require("../_db/index");
 const findUnique = prisma.user.findUnique;
 const create = prisma.user.create;
 const deleting = prisma.user.delete;
-const put = prisma.user.put;
+const update = prisma.user.update;
 
-module.exports = { findUnique, create, deleting, put };
+module.exports = { findUnique, create, deleting, update };
