@@ -52,6 +52,8 @@ const createUser = createNew.newUser;
 
 const searching = {
   searchUserById: async (req, res, userId, findUserMethod, key) => {
+    let user;
+
     if (key === "patch") {
       const data = req.body;
       user = await findUserMethod({
@@ -65,7 +67,6 @@ const searching = {
         data: { name, email, password },
       });
     } else {
-      const data = req.body;
       user = await findUserMethod({ where: { id: userId } });
     }
 

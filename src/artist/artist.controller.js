@@ -55,4 +55,16 @@ artist.patch("/:id", async (req, res) => {
   }
 });
 
+artist.put("/:id", async (req, res) => {
+  const artistId = parseInt(req.params.id);
+  const key = "put";
+
+  try {
+    await searchArtistById(req, res, artistId, update, key);
+  } catch (error) {
+    const isi = "Failed";
+    errorMassage(error, isi, res);
+  }
+});
+
 module.exports = artist;

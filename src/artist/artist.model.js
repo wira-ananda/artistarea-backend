@@ -42,16 +42,25 @@ const createArtist = createNew.newartist;
 
 const searching = {
   searchartistById: async (req, res, artistId, findArtistMethod, key) => {
-    const data = req.body;
+    let artist;
 
-    const artist = await findArtistMethod(
-      key == "patch" || key == "put"
-        ? {
-            where: { id: artistId },
-            data: data,
-          }
-        : { where: { id: artistId } }
-    );
+    if (key === "patch") {
+      const data = req.body;
+      artist = await findArtistMethod({
+        where: { id: artistId },
+        data: data,
+      });
+    } else if (key === "put") {
+      const { name, bio, website } = req.body;
+      artist = await findArtistMethod({
+        where: { id: artistId },
+        data: { name, bio, website },
+      });
+    } else {
+      artist = await findArtistMethod({
+        where: { id: artistId },
+      });
+    }
 
     if (!artist) {
       return res.status(404).send({ message: "artist not found" });
