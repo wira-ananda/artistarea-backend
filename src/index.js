@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const router = require("./user/user.controller");
+const user = require("./user/user.controller");
+const artist = require("./artist/artist.controller");
 
 const app = express();
 
@@ -11,4 +12,5 @@ app.listen(PORT, () => {
 
 app.use(bodyParser.json());
 
-app.use("/user", router);
+app.use("/user", user);
+app.use("/artist", artist);

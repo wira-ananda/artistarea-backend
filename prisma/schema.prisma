@@ -9,7 +9,7 @@ datasource db {
 
 model User {
   id        Int       @id @default(autoincrement())
-  name      String
+  name      String    @unique
   email     String    @unique
   password  String    @unique
   createdAt DateTime  @default(now())
@@ -21,7 +21,7 @@ model User {
 
 model Artist {
   id        Int       @id @default(autoincrement())
-  name      String
+  name      String    @unique
   bio       String?
   website   String?
   createdAt DateTime  @default(now())

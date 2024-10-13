@@ -1,22 +1,25 @@
-const prisma = require("../db/index");
-
 const errorMassage = (error, isi, res) => {
   console.error(error);
   res.status(500).send({ error: isi });
 };
 
 const existingCheck = {
-  existingUser: async (userData, res) => {
+  existingUser: async (userData, res, findUnique) => {
     const { name, email, password } = userData;
-    const existingUserEmail = await prisma.user.findUnique({
+    const existingUserUser = await findUnique({
+      where: { user },
+    });
+    const existingUserEmail = await findUnique({
       where: { email },
     });
-    const existingUserPassword = await prisma.user.findUnique({
+    const existingUserPassword = await findUnique({
       where: { password },
     });
 
-    if (existingUserEmail || existingUserPassword) {
-      return res.status(400).send({ message: "That already exists" });
+    if (existingUserUser || existingUserEmail || existingUserPassword) {
+      return res
+        .status(400)
+        .send({ message: "One of the option is already exists" });
     }
   },
 };
@@ -24,14 +27,14 @@ const existingCheck = {
 const userExist = existingCheck.existingUser;
 
 const createNew = {
-  newUser: async (userData, res) => {
+  newUser: async (userData, res, createUser) => {
     const { name, email, password } = userData;
     if (!name || !email || !password) {
       return res
         .status(400)
         .send({ message: "Username, Email, or Password is required" });
     }
-    const newUser = await prisma.user.create({
+    const newUser = await createUser({
       data: {
         name,
         email,
@@ -48,8 +51,8 @@ const createNew = {
 const createUser = createNew.newUser;
 
 const searching = {
-  searchUserById: async (userId, res) => {
-    const user = await prisma.user.findUnique({
+  searchUserById: async (userId, res, findUserMethod, response) => {
+    const user = await findUserMethod({
       where: { id: userId },
     });
 
@@ -57,7 +60,9 @@ const searching = {
       return res.status(404).send({ message: "User not found" });
     }
 
-    res.status(200).send({ data: user });
+    let resback = response == "delete" ? "Delete successfully" : { data: user };
+
+    res.status(200).send({ resback });
   },
 };
 
