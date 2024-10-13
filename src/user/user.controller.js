@@ -1,7 +1,4 @@
 const express = require("express");
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
-
 const {
   userExist,
   createUser,
@@ -13,7 +10,7 @@ const router = express.Router();
 
 router.post("/register", async (req, res) => {
   try {
-    await userExist(req.body.email, res);
+    await userExist(req.body, res);
 
     await createUser(req.body, res);
   } catch (error) {

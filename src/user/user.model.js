@@ -1,5 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const prisma = require("../db/index");
 
 const errorMassage = (error, isi, res) => {
   console.error(error);
@@ -7,13 +6,17 @@ const errorMassage = (error, isi, res) => {
 };
 
 const existingCheck = {
-  existingUser: async (email, res) => {
-    const existingUser = await prisma.user.findUnique({
+  existingUser: async (userData, res) => {
+    const { name, email, password } = userData;
+    const existingUserEmail = await prisma.user.findUnique({
       where: { email },
     });
+    const existingUserPassword = await prisma.user.findUnique({
+      where: { password },
+    });
 
-    if (existingUser) {
-      return res.status(400).send({ message: "Email already exists" });
+    if (existingUserEmail || existingUserPassword) {
+      return res.status(400).send({ message: "That already exists" });
     }
   },
 };
