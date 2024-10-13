@@ -1,5 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const prisma = require("../db/index");
 
 const errorMassage = (error, isi, res) => {
   console.error(error);
@@ -7,13 +6,17 @@ const errorMassage = (error, isi, res) => {
 };
 
 const existingCheck = {
-  existingUser: async (email, res) => {
-    const existingUser = await prisma.user.findUnique({
+  existingUser: async (userData, res) => {
+    const { name, email, password } = userData;
+    const existingUserEmail = await prisma.user.findUnique({
       where: { email },
     });
+    const existingUserPassword = await prisma.user.findUnique({
+      where: { password },
+    });
 
-    if (existingUser) {
-      return res.status(400).send({ message: "Email already exists" });
+    if (existingUserEmail || existingUserPassword) {
+      return res.status(400).send({ message: "That already exists" });
     }
   },
 };
@@ -22,23 +25,30 @@ const userExist = existingCheck.existingUser;
 
 const createNew = {
   newUser: async (userData, res) => {
-    const { name, email, password } = userData;
-    if (!name || !email || !password) {
-      return res
-        .status(400)
-        .send({ message: "Username, Email, or Password is required" });
-    }
-    const newUser = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password,
-      },
-    });
+    try {
+      const { name, email, password } = userData;
+      if (!name || !email || !password) {
+        return res
+          .status(400)
+          .send({ message: "Username, Email, or Password is required" });
+      }
 
-    res
-      .status(201)
-      .send({ data: newUser, message: "User created successfully!" });
+      userExist(userData, res);
+
+      const newUser = await prisma.user.create({
+        data: {
+          name,
+          email,
+          password,
+        },
+      });
+
+      res
+        .status(201)
+        .send({ data: newUser, message: "User created successfully!" });
+    } catch (e) {
+      errorMassage(e, "error", res);
+    }
   },
 };
 
