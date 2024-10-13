@@ -41,17 +41,23 @@ const createNew = {
 const createArtist = createNew.newartist;
 
 const searching = {
-  searchartistById: async (artistId, res, findArtistMethod, response) => {
-    const artist = await findArtistMethod({
-      where: { id: artistId },
-    });
+  searchartistById: async (req, res, artistId, findArtistMethod, key) => {
+    const data = req.body;
+
+    const artist = await findArtistMethod(
+      key == "patch" || key == "put"
+        ? {
+            where: { id: artistId },
+            data: data,
+          }
+        : { where: { id: artistId } }
+    );
 
     if (!artist) {
       return res.status(404).send({ message: "artist not found" });
     }
 
-    let resback =
-      response == "delete" ? "Delete successfully" : { data: artist };
+    let resback = key == "delete" ? "Delete successfully" : { data: artist };
 
     res.status(200).send({ resback });
   },

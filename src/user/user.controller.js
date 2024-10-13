@@ -1,5 +1,5 @@
 const express = require("express");
-const { findUnique, create, deleting } = require("./user.prisma");
+const { findUnique, create, deleting, update } = require("./user.prisma");
 const {
   userExist,
   createUser,
@@ -24,7 +24,7 @@ user.get("/:id", async (req, res) => {
   const userId = parseInt(req.params.id);
 
   try {
-    await searchUserById(userId, res, findUnique);
+    await searchUserById(req, res, userId, findUnique);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
@@ -36,7 +36,19 @@ user.delete("/:id", async (req, res) => {
   const response = "delete";
 
   try {
-    await searchUserById(userId, res, deleting, response);
+    await searchUserById(req, res, userId, deleting, response);
+  } catch (error) {
+    const isi = "Failed";
+    errorMassage(error, isi, res);
+  }
+});
+
+user.patch("/:id", async (req, res) => {
+  const userId = parseInt(req.params.id);
+  const key = "patch";
+
+  try {
+    await searchUserById(req, res, userId, update, key);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);

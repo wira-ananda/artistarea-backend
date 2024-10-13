@@ -51,16 +51,23 @@ const createNew = {
 const createUser = createNew.newUser;
 
 const searching = {
-  searchUserById: async (userId, res, findUserMethod, response) => {
-    const user = await findUserMethod({
-      where: { id: userId },
-    });
+  searchUserById: async (req, res, userId, findUserMethod, key) => {
+    const data = req.body;
+
+    const user = await findUserMethod(
+      key == "patch" || key == "put"
+        ? {
+            where: { id: userId },
+            data: data,
+          }
+        : { where: { id: userId } }
+    );
 
     if (!user) {
-      return res.status(404).send({ message: "User not found" });
+      return res.status(404).send({ message: "user not found" });
     }
 
-    let resback = response == "delete" ? "Delete successfully" : { data: user };
+    let resback = key == "delete" ? "Delete successfully" : { data: user };
 
     res.status(200).send({ resback });
   },

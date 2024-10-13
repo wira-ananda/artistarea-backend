@@ -1,5 +1,5 @@
 const express = require("express");
-const { findUnique, create, deleting } = require("./artist.prisma");
+const { findUnique, create, deleting, update } = require("./artist.prisma");
 const {
   artistExist,
   createArtist,
@@ -24,7 +24,7 @@ artist.get("/:id", async (req, res) => {
   const artistId = parseInt(req.params.id);
 
   try {
-    await searchArtistById(artistId, res, findUnique);
+    await searchArtistById(req, res, artistId, findUnique);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
@@ -33,10 +33,22 @@ artist.get("/:id", async (req, res) => {
 
 artist.delete("/:id", async (req, res) => {
   const artistId = parseInt(req.params.id);
-  const response = "delete";
+  const key = "delete";
 
   try {
-    await searchArtistById(artistId, res, deleting, response);
+    await searchArtistById(req, res, artistId, deleting, key);
+  } catch (error) {
+    const isi = "Failed";
+    errorMassage(error, isi, res);
+  }
+});
+
+artist.patch("/:id", async (req, res) => {
+  const artistId = parseInt(req.params.id);
+  const key = "patch";
+
+  try {
+    await searchArtistById(req, res, artistId, update, key);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
