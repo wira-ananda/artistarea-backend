@@ -4,6 +4,7 @@ const user = require("./user/user.controller");
 const artist = require("./artist/artist.controller");
 const artwork = require("./artwork/artwork.controller");
 const like = require("./like/like.controller");
+const follow = require("./follow/follow.controller");
 
 const app = express();
 
@@ -18,3 +19,4 @@ app.use("/user", user);
 app.use("/artist", artist);
 app.use("/artwork", artwork);
 app.use("/like", like);
+app.use("/follow", follow);

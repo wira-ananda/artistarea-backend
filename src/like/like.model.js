@@ -4,9 +4,9 @@ const errorMassage = (error, isi, res) => {
 };
 
 const existingCheck = {
-  existingLike: async (artistData, res, findUnique) => {
+  existingLike: async (artistData, res, findFirst) => {
     const { userId, artworkId } = artistData;
-    const existingLike = await findUnique({
+    const existingLike = await findFirst({
       where: { userId: userId, artworkId: artworkId },
     });
 
