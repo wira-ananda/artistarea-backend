@@ -1,5 +1,11 @@
 const express = require("express");
-const { findUnique, create, deleting, update } = require("./artist.prisma");
+const {
+  findUnique,
+  findFirst,
+  create,
+  deleting,
+  update,
+} = require("./artist.prisma");
 const {
   artistExist,
   createArtist,

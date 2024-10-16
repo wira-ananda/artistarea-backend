@@ -1,5 +1,11 @@
 const express = require("express");
-const { findUnique, create, deleting, update } = require("./artwork.prisma");
+const {
+  findUnique,
+  findFirst,
+  create,
+  deleting,
+  update,
+} = require("./artwork.prisma");
 const {
   createArtwork,
   errorMassage,
@@ -16,8 +22,6 @@ artwork.post("/post", async (req, res) => {
     errorMassage(error, isi, res);
   }
 });
-
-module.exports = artwork;
 
 artwork.get("/:id", async (req, res) => {
   const artworkId = parseInt(req.params.id);
@@ -65,3 +69,5 @@ artwork.put("/:id", async (req, res) => {
     errorMassage(error, isi, res);
   }
 });
+
+module.exports = artwork;
