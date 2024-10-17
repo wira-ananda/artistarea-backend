@@ -12,8 +12,7 @@ const follow = express.Router();
 
 follow.post("/adding", async (req, res) => {
   try {
-    await alreadyFollow(req.body, res, findFirst);
-    await addingFollow(req.body, res, create);
+    await alreadyFollow(req.body, res, findFirst, create);
   } catch (error) {
     const isi = "Failed to following";
     errorMassage(error, isi, res);

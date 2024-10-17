@@ -17,9 +17,7 @@ const artist = express.Router();
 
 artist.post("/register", async (req, res) => {
   try {
-    await artistExist(req.body, res, findUnique);
-
-    await createArtist(req.body, res, create);
+    await artistExist(req.body, res, findUnique, create);
   } catch (error) {
     const isi = "Gagal membuat akun artist";
     errorMassage(error, isi, res);

@@ -17,9 +17,7 @@ const user = express.Router();
 
 user.post("/register", async (req, res) => {
   try {
-    await userExist(req.body, res, findUnique);
-
-    await createUser(req.body, res, create);
+    await userExist(req.body, res, findUnique, create);
   } catch (error) {
     const isi = "Gagal membuat akun";
     errorMassage(error, isi, res);

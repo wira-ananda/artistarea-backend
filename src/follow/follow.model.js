@@ -4,14 +4,16 @@ const errorMassage = (error, isi, res) => {
 };
 
 const existingCheck = {
-  existingFollow: async (artistData, res, findFirst) => {
-    const { userId, artistId } = artistData;
+  existingFollow: async (followData, res, findFirst, create) => {
+    const { userId, artistId } = followData;
     const existingFollow = await findFirst({
       where: { userId: userId, artistId: artistId },
     });
 
     if (existingFollow) {
       return res.status(400).send({ message: "U already follow the artist" });
+    } else {
+      await addingFollow(followData, res, create);
     }
   },
 };

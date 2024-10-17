@@ -4,14 +4,16 @@ const errorMassage = (error, isi, res) => {
 };
 
 const existingCheck = {
-  existingLike: async (artistData, res, findFirst) => {
-    const { userId, artworkId } = artistData;
+  existingLike: async (likeData, res, findFirst, create) => {
+    const { userId, artworkId } = likeData;
     const existingLike = await findFirst({
       where: { userId: userId, artworkId: artworkId },
     });
 
     if (existingLike) {
       return res.status(400).send({ message: "U already like this one" });
+    } else {
+      await addingLike(likeData, res, create);
     }
   },
 };

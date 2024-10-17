@@ -4,10 +4,10 @@ const errorMassage = (error, isi, res) => {
 };
 
 const existingCheck = {
-  existingUser: async (userData, res, findUnique) => {
+  existingUser: async (userData, res, findUnique, create) => {
     const { name, email, password } = userData;
-    const existingUserUser = await findUnique({
-      where: { user },
+    const existingUserName = await findUnique({
+      where: { name },
     });
     const existingUserEmail = await findUnique({
       where: { email },
@@ -16,10 +16,12 @@ const existingCheck = {
       where: { password },
     });
 
-    if (existingUserUser || existingUserEmail || existingUserPassword) {
+    if (existingUserName || existingUserEmail || existingUserPassword) {
       return res
         .status(400)
         .send({ message: "One of the option is already exists" });
+    } else {
+      await createUser(userData, res, create);
     }
   },
 };

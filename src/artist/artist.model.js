@@ -4,7 +4,7 @@ const errorMassage = (error, isi, res) => {
 };
 
 const existingCheck = {
-  existingArtist: async (artistData, res, findUnique) => {
+  existingArtist: async (artistData, res, findUnique, create) => {
     const { name, bio, website } = artistData;
     const existingArtistName = await findUnique({
       where: { name },
@@ -12,6 +12,8 @@ const existingCheck = {
 
     if (existingArtistName) {
       return res.status(400).send({ message: "Artistname already exists" });
+    } else {
+      await createArtist(artistData, res, create);
     }
   },
 };

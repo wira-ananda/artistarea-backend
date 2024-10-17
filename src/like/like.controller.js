@@ -12,8 +12,7 @@ const like = express.Router();
 
 like.post("/adding", async (req, res) => {
   try {
-    await alreadyLike(req.body, res, findFirst);
-    await addingLike(req.body, res, create);
+    await alreadyLike(req.body, res, findFirst, create);
   } catch (error) {
     const isi = "Failed to adding like";
     errorMassage(error, isi, res);
