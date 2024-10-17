@@ -6,7 +6,12 @@ const {
   deleting,
   update,
 } = require("./follow.prisma");
-const { addingFollow, errorMassage, alreadyFollow } = require("./follow.model");
+const {
+  addingFollow,
+  errorMassage,
+  alreadyFollow,
+  searchFollowById,
+} = require("./follow.model");
 
 const follow = express.Router();
 
@@ -15,6 +20,17 @@ follow.post("/adding", async (req, res) => {
     await alreadyFollow(req.body, res, findFirst, create);
   } catch (error) {
     const isi = "Failed to following";
+    errorMassage(error, isi, res);
+  }
+});
+follow.delete("/:id", async (req, res) => {
+  const followId = parseInt(req.params.id);
+  const response = "delete";
+
+  try {
+    await searchFollowById(req, res, followId, deleting, response);
+  } catch (error) {
+    const isi = "Failed";
     errorMassage(error, isi, res);
   }
 });

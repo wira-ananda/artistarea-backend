@@ -48,4 +48,29 @@ const createNew = {
 
 const addingFollow = createNew.newFollow;
 
-module.exports = { errorMassage, alreadyFollow, addingFollow };
+const searching = {
+  searchFollowById: async (req, res, followId, findFollowMethod, key) => {
+    let follow;
+
+    if (key === "delete") {
+      follow = await findFollowMethod({ where: { id: followId } });
+    }
+
+    if (!follow) {
+      return res.status(404).send({ message: "follow not found" });
+    }
+
+    let resback = key == "delete" ? "Delete successfully" : { data: follow };
+
+    res.status(200).send({ resback });
+  },
+};
+
+const searchFollowById = searching.searchFollowById;
+
+module.exports = {
+  errorMassage,
+  alreadyFollow,
+  addingFollow,
+  searchFollowById,
+};

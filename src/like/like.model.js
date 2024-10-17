@@ -48,4 +48,24 @@ const createNew = {
 
 const addingLike = createNew.newLike;
 
-module.exports = { errorMassage, alreadyLike, addingLike };
+const searching = {
+  searchLikeById: async (req, res, likeId, findLikeMethod, key) => {
+    let like;
+
+    if (key === "delete") {
+      like = await findLikeMethod({ where: { id: likeId } });
+    }
+
+    if (!like) {
+      return res.status(404).send({ message: "like not found" });
+    }
+
+    let resback = key == "delete" ? "Delete successfully" : { data: like };
+
+    res.status(200).send({ resback });
+  },
+};
+
+const searchLikeById = searching.searchLikeById;
+
+module.exports = { errorMassage, alreadyLike, addingLike, searchLikeById };
