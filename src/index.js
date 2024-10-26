@@ -14,10 +14,11 @@ const PORT = process.env.PORT || 2000;
 app.use((req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
-    "default-src 'self'; script-src 'self' https://vercel.live; connect-src 'self' https://vercel.live"
+    "default-src 'self'; script-src 'self' 'unsafe-eval' https://vercel.live; connect-src 'self' https://vercel.live"
   );
   next();
 });
+
 
 // Middleware lainnya
 app.use(bodyParser.json());
