@@ -14,7 +14,6 @@ model User {
   password  String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  artworks  Artwork[] // Relasi dengan karya seni
   follows   Follow[] // Relasi dengan seniman yang diikuti
   likes     Like[] // Relasi dengan karya yang disukai
 }

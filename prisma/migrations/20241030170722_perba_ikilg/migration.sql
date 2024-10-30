@@ -33,7 +33,6 @@ CREATE TABLE "Artwork" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "artistId" INTEGER NOT NULL,
-    "userId" INTEGER,
 
     CONSTRAINT "Artwork_pkey" PRIMARY KEY ("id")
 );
@@ -88,9 +87,6 @@ CREATE UNIQUE INDEX "Artist_password_key" ON "Artist"("password");
 
 -- AddForeignKey
 ALTER TABLE "Artwork" ADD CONSTRAINT "Artwork_artistId_fkey" FOREIGN KEY ("artistId") REFERENCES "Artist"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Artwork" ADD CONSTRAINT "Artwork_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Like" ADD CONSTRAINT "Like_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
