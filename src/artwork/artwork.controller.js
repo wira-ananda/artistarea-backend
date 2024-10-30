@@ -1,7 +1,6 @@
 const express = require("express");
 const {
   findUnique,
-  findMany,
   create,
   deleting,
   update,
@@ -21,26 +20,6 @@ artwork.post("/post", async (req, res) => {
     await createArtwork(req.body, res, create);
   } catch (error) {
     const isi = "Failed to create artwork";
-    errorMassage(error, isi, res);
-  }
-});
-
-// Endpoint untuk mendapatkan semua artwork
-artwork.get("/", async (req, res) => {
-  try {
-    const allArtworks = await findMany({
-      include: {
-        artist: true, 
-        likes: true,
-        _count: {
-          select: { likes: true }, 
-        },
-      },
-    });
-
-    res.status(200).send({ data: allArtworks });
-  } catch (error) {
-    const isi = "Failed to fetch artworks";
     errorMassage(error, isi, res);
   }
 });

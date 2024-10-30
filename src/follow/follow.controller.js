@@ -23,6 +23,7 @@ follow.post("/adding", async (req, res) => {
     errorMassage(error, isi, res);
   }
 });
+
 follow.delete("/:id", async (req, res) => {
   const followId = parseInt(req.params.id);
   const response = "delete";

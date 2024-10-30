@@ -14,6 +14,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Artist" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "bio" TEXT,
     "website" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -81,6 +82,9 @@ CREATE UNIQUE INDEX "User_password_key" ON "User"("password");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Artist_name_key" ON "Artist"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Artist_password_key" ON "Artist"("password");
 
 -- AddForeignKey
 ALTER TABLE "Artwork" ADD CONSTRAINT "Artwork_artistId_fkey" FOREIGN KEY ("artistId") REFERENCES "Artist"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
