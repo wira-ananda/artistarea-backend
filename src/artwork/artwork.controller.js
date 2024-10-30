@@ -50,7 +50,6 @@ const {
   searchArtworkById,
 } = require("./artwork.model");
 
-const artwork = express.Router();
 
 artwork.post("/post", async (req, res) => {
   try {
