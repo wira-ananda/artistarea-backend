@@ -36,4 +36,17 @@ like.delete("/:id", async (req, res) => {
   }
 });
 
+
+like.get("/:id", async (req, res) => {
+  const likeId = parseInt(req.params.id);
+
+  try {
+    await searchLikeById(req, res, likeId, findUnique);
+  } catch (error) {
+    const isi = "Failed";
+    errorMassage(error, isi, res);
+  }
+});
+
+
 module.exports = like;
