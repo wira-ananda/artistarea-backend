@@ -25,23 +25,6 @@ artwork.post("/post", async (req, res) => {
   }
 });
 
-// Endpoint untuk mendapatkan artwork berdasarkan ID
-artwork.get("/:id", async (req, res) => {
-  const artworkId = parseInt(req.params.id);
-
-  // Validasi ID artwork
-  if (isNaN(artworkId)) {
-    return res.status(400).send({ message: "Invalid artwork ID" });
-  }
-
-  try {
-    await searchArtworkById(req, res, artworkId, findUnique, count);
-  } catch (error) {
-    const isi = "Failed to fetch artwork";
-    errorMassage(error, isi, res);
-  }
-});
-
 // Endpoint untuk mendapatkan semua artwork
 artwork.get("/", async (req, res) => {
   try {
@@ -61,6 +44,25 @@ artwork.get("/", async (req, res) => {
     errorMassage(error, isi, res);
   }
 });
+
+// Endpoint untuk mendapatkan artwork berdasarkan ID
+artwork.get("/:id", async (req, res) => {
+  const artworkId = parseInt(req.params.id);
+
+  // Validasi ID artwork
+  if (isNaN(artworkId)) {
+    return res.status(400).send({ message: "Invalid artwork ID" });
+  }
+
+  try {
+    await searchArtworkById(req, res, artworkId, findUnique, count);
+  } catch (error) {
+    const isi = "Failed to fetch artwork";
+    errorMassage(error, isi, res);
+  }
+});
+
+
 
 // Endpoint untuk menghapus artwork berdasarkan ID
 artwork.delete("/:id", async (req, res) => {
