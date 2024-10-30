@@ -35,8 +35,7 @@ artwork.get("/:id", async (req, res) => {
   }
 });
 
-artwork.get("/artworks", async (res) => {
-
+artwork.get("/artworks", async (req,res) => {
   try {
     const allArtworks = await findMany({
       include: {
@@ -48,7 +47,7 @@ artwork.get("/artworks", async (res) => {
       },
     });
 
-    res.status(200).send({ data: allArtworks,  });
+    res.status(200).send({ data: allArtworks  });
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
