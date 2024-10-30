@@ -61,25 +61,22 @@ const searching = {
     } else {
       artist = await findArtistMethod({
         where: { id: artistId },
-        include: { followers: true }, // Tambahkan include followers
+        include: { followers: true },
       });
     }
 
-    // Periksa apakah artist ditemukan
     if (!artist) {
       return res.status(404).send({ message: "artist not found" });
     }
 
-    // Hitung jumlah followers
-    const followCount = await countFollowers({
+    const followersCount = await countFollowers({
       where: { artistId: artistId }
     });
 
-    // Kirim response berdasarkan key
     if (key === "delete") {
       res.status(200).send({ message: "Delete successfully" });
     } else {
-      res.status(200).send({ data: artist, followCount });
+      res.status(200).send({ data: artist, followersCount });
     }
   },
 };
