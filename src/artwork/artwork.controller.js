@@ -1,6 +1,7 @@
 const express = require("express");
 const {
   findUnique,
+  findMany,
   create,
   deleting,
   update,
