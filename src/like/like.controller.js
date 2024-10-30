@@ -4,7 +4,6 @@ const {
   findFirst,
   create,
   deleting,
-  update,
 } = require("./like.prisma");
 const {
   addingLike,
@@ -47,6 +46,7 @@ like.get("/:id", async (req, res) => {
     errorMassage(error, isi, res);
   }
 });
+
 
 
 module.exports = like;

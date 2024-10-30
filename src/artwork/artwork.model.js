@@ -33,7 +33,7 @@ const createNew = {
 const createArtwork = createNew.newArtwork;
 
 const searching = {
-  searchArtworkById: async (req, res, artworkId, findArtworkMethod, key) => {
+  searchArtworkById: async (req, res, artworkId, findArtworkMethod, countArtworkLikes, key) => {
     let artwork;
 
     if (key === "patch") {
@@ -51,19 +51,25 @@ const searching = {
     } else {
       artwork = await findArtworkMethod({
         where: { id: artworkId },
+        include: {
+          artist: true,
+          likes: true,
+        }
       });
     }
 
+    const likeCount = await countArtworkLikes({
+      where: {id: artworkId}
+    })
+    
     if (!artwork) {
       return res.status(404).send({ message: "artwork not found" });
     }
 
-    // let resback = key == "delete" ? "Delete successfully" : { data: artwork };
-
     if (key === "delete") {
       res.status(200).send({ message: "Delete successfully" });
     } else {
-      res.status(200).send({ data: artwork });
+      res.status(200).send({ data: artwork, likeCount });
     }
   },
 };

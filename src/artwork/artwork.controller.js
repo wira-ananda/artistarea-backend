@@ -5,6 +5,7 @@ const {
   create,
   deleting,
   update,
+  count,
 } = require("./artwork.prisma");
 const {
   createArtwork,
@@ -27,7 +28,7 @@ artwork.get("/:id", async (req, res) => {
   const artworkId = parseInt(req.params.id);
 
   try {
-    await searchArtworkById(req, res, artworkId, findUnique);
+    await searchArtworkById(req, res, artworkId, findUnique, count);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);

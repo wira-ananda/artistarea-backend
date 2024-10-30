@@ -6,4 +6,5 @@ const create = prisma.like.create;
 const deleting = prisma.like.delete;
 const update = prisma.like.update;
 
+
 module.exports = { findUnique, findFirst, create, deleting, update };
