@@ -76,9 +76,11 @@ const searching = {
       return res.status(404).send({ message: "user not found" });
     }
 
-    let resback = key == "delete" ? "Delete successfully" : { data: user };
-
-    res.status(200).send({ resback });
+    if (key === "delete") {
+      res.status(200).send({ message: "Delete successfully" });
+    } else {
+      res.status(200).send({ data: artwork });
+    }
   },
 };
 

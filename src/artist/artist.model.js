@@ -68,9 +68,11 @@ const searching = {
       return res.status(404).send({ message: "artist not found" });
     }
 
-    let resback = key == "delete" ? "Delete successfully" : { data: artist };
-
-    res.status(200).send({ resback });
+    if (key === "delete") {
+      res.status(200).send({ message: "Delete successfully" });
+    } else {
+      res.status(200).send({ data: artwork });
+    }
   },
 };
 
