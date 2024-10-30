@@ -60,21 +60,30 @@ const searching = {
       });
     } else {
       artist = await findArtistMethod({
-        where: { id: artistId }
+        where: { id: artistId },
+        include: { followers: true }, // Tambahkan include followers
       });
     }
 
+    // Periksa apakah artist ditemukan
     if (!artist) {
       return res.status(404).send({ message: "artist not found" });
     }
 
+    // Hitung jumlah followers
+    const followCount = await countFollowers({
+      where: { artistId: artistId }
+    });
+
+    // Kirim response berdasarkan key
     if (key === "delete") {
       res.status(200).send({ message: "Delete successfully" });
     } else {
-      res.status(200).send({ data: artist });
+      res.status(200).send({ data: artist, followCount });
     }
   },
 };
+
 
 const searchArtistById = searching.searchartistById;
 
