@@ -61,6 +61,7 @@ const searching = {
     } else {
       artist = await findArtistMethod({
         where: { id: artistId },
+        include: {follows: true}
       });
     }
 
