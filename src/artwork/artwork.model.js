@@ -58,7 +58,9 @@ const searching = {
       });
     }
 
-    const likeCount = likes.length;
+    const likeCount = await countArtworkLikes({
+      where: {artworkId: artworkId}
+    })
     
     if (!artwork) {
       return res.status(404).send({ message: "artwork not found" });
