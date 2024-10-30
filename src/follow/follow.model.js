@@ -50,7 +50,7 @@ const addingFollow = createNew.newFollow;
 
 const searching = {
   searchFollowById: async (req, res, followId, findFollowMethod, key) => {
-    let follow;
+    let follow =  await findFollowMethod({ where: { id: followId } });
 
     if (key === "delete") {
       follow = await findFollowMethod({ where: { id: followId } });
