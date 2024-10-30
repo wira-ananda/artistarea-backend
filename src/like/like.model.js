@@ -5,9 +5,9 @@ const errorMassage = (error, isi, res) => {
 
 const existingCheck = {
   existingLike: async (likeData, res, findFirst, create) => {
-    const { userId, artworkId } = likeData;
+    const { likeId, artworkId } = likeData;
     const existingLike = await findFirst({
-      where: { userId: userId, artworkId: artworkId },
+      where: { likeId: likeId, artworkId: artworkId },
     });
 
     if (existingLike) {
@@ -22,16 +22,16 @@ const alreadyLike = existingCheck.existingLike;
 
 const createNew = {
   newLike: async (likeData, res, create) => {
-    const { userId, artworkId } = likeData;
+    const { likeId, artworkId } = likeData;
 
-    if (!userId || !artworkId) {
+    if (!likeId || !artworkId) {
       return res.status(400).send({ message: "All fields are required" });
     }
 
     const newLike = await create({
       data: {
-        user: {
-          connect: { id: userId },
+        like: {
+          connect: { id: likeId },
         },
         artwork: {
           connect: { id: artworkId },
@@ -50,11 +50,8 @@ const addingLike = createNew.newLike;
 
 const searching = {
   searchLikeById: async (req, res, likeId, findLikeMethod, key) => {
-    let like;
-
-    if (key === "delete") {
-      like = await findLikeMethod({ where: { id: likeId } });
-    }
+    let like = await findLikeMethod({ where: { id: likeId } });
+    
 
     if (!like) {
       return res.status(404).send({ message: "like not found" });
