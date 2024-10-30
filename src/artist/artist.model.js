@@ -60,14 +60,9 @@ const searching = {
       });
     } else {
       artist = await findArtistMethod({
-        where: { id: artistId },
-        include: {follows: true}
+        where: { id: artistId }
       });
     }
-
-    const followCount = await countFollowers({
-      where: {artistId: artistId}
-    })
 
     if (!artist) {
       return res.status(404).send({ message: "artist not found" });
@@ -76,7 +71,7 @@ const searching = {
     if (key === "delete") {
       res.status(200).send({ message: "Delete successfully" });
     } else {
-      res.status(200).send({ data: artist, followCount });
+      res.status(200).send({ data: artist });
     }
   },
 };
