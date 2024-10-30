@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const user = require("./user/user.controller");
 const artist = require("./artist/artist.controller");
@@ -10,6 +11,13 @@ const follow = require("./follow/follow.controller");
 const app = express();
 const PORT = process.env.PORT || 2000;
 
+// Middleware CORS
+app.use(cors({
+  origin: "*", // Sesuaikan dengan URL frontend Anda atau gunakan "*" untuk mengizinkan semua origin
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Sesuaikan jika Anda menggunakan cookie
+}));
+
 // Middleware untuk Content Security Policy (CSP)
 app.use((req, res, next) => {
   res.setHeader(
@@ -18,7 +26,6 @@ app.use((req, res, next) => {
   );
   next();
 });
-
 
 // Middleware lainnya
 app.use(bodyParser.json());
