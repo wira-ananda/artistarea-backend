@@ -63,7 +63,7 @@ const searching = {
     if (key === "delete") {
       res.status(200).send({ message: "Delete successfully" });
     } else {
-      res.status(200).send({ data: artwork });
+      res.status(200).send({ data: like });
     }
   },
 };
