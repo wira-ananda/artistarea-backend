@@ -43,7 +43,7 @@ artwork.get("/:id", async (req, res) => {
 });
 
 // Endpoint untuk mendapatkan semua artwork
-artwork.get("/artworks", async (req, res) => {
+artwork.get("/", async (req, res) => {
   try {
     const allArtworks = await findMany({
       include: {
