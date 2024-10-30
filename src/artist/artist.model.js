@@ -43,7 +43,7 @@ const createNew = {
 const createArtist = createNew.newartist;
 
 const searching = {
-  searchartistById: async (req, res, artistId, findArtistMethod, key) => {
+  searchartistById: async (req, res, artistId, findArtistMethod, countFollowers, key) => {
     let artist;
 
     if (key === "patch") {
@@ -65,6 +65,10 @@ const searching = {
       });
     }
 
+    const followCount = await countFollowers({
+      where: {artistId: artistId}
+    })
+
     if (!artist) {
       return res.status(404).send({ message: "artist not found" });
     }
@@ -72,7 +76,7 @@ const searching = {
     if (key === "delete") {
       res.status(200).send({ message: "Delete successfully" });
     } else {
-      res.status(200).send({ data: artist });
+      res.status(200).send({ data: artist, followCount });
     }
   },
 };
