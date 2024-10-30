@@ -13,6 +13,8 @@ const {
   errorMassage,
 } = require("./artist.model");
 
+const artist = express.Router(); // Inisialisasi router
+
 artist.post("/register", async (req, res) => {
   try {
     await artistExist(req.body, res, findUnique, create);
