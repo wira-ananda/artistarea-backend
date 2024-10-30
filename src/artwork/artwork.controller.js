@@ -24,6 +24,26 @@ artwork.post("/post", async (req, res) => {
   }
 });
 
+// Endpoint untuk mendapatkan semua artwork
+artwork.get("/", async (req, res) => {
+  try {
+    const allArtworks = await findMany({
+      include: {
+        artist: true, 
+        likes: true,
+        _count: {
+          select: { likes: true }, 
+        },
+      },
+    });
+
+    res.status(200).send({ data: allArtworks });
+  } catch (error) {
+    const isi = "Failed to fetch artworks";
+    errorMassage(error, isi, res);
+  }
+});
+
 // Endpoint untuk mendapatkan artwork berdasarkan ID
 artwork.get("/:id", async (req, res) => {
   const artworkId = parseInt(req.params.id);
@@ -40,8 +60,6 @@ artwork.get("/:id", async (req, res) => {
     errorMassage(error, isi, res);
   }
 });
-
-
 
 // Endpoint untuk menghapus artwork berdasarkan ID
 artwork.delete("/:id", async (req, res) => {
