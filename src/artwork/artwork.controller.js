@@ -1,7 +1,7 @@
 const express = require("express");
 const {
   findUnique,
-  findFirst,
+  findMany,
   create,
   deleting,
   update,
@@ -29,6 +29,26 @@ artwork.get("/:id", async (req, res) => {
 
   try {
     await searchArtworkById(req, res, artworkId, findUnique, count);
+  } catch (error) {
+    const isi = "Failed";
+    errorMassage(error, isi, res);
+  }
+});
+
+artwork.get("/artworks", async (res) => {
+
+  try {
+    const allArtworks = await findMany({
+      include: {
+        artist: true, 
+        likes: true,
+        _count: {
+          select: { likes: true }, 
+        },
+      },
+    });
+
+    res.status(200).send({ data: allArtworks,  });
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
