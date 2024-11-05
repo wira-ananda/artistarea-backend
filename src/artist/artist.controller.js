@@ -1,7 +1,7 @@
 const express = require("express");
 const {
   findUnique,
-  findFirst,
+  findMany,
   create,
   deleting,
   update,
@@ -24,6 +24,16 @@ artist.post("/register", async (req, res) => {
     errorMassage(error, isi, res);
   }
 });
+
+user.get("/", async (req, res) => {
+  try {
+    const allArtist = await findMany()
+    res.status(200).send({data: allArtist})
+  } catch (error) {
+    const isi = "Gagal membuat akun"
+    errorMassage(error, isi, res)
+  }
+})
 
 artist.get("/:id", async (req, res) => {
   const artistId = parseInt(req.params.id);
