@@ -12,7 +12,6 @@ const {
   searchUserById,
   errorMassage,
 } = require("./user.model");
-const { findMany } = require("../artwork/artwork.prisma");
 
 const user = express.Router();
 
