@@ -12,6 +12,7 @@ const {
   searchUserById,
   errorMassage,
 } = require("./user.model");
+const { findMany } = require("../artwork/artwork.prisma");
 
 const user = express.Router();
 
@@ -23,6 +24,16 @@ user.post("/register", async (req, res) => {
     errorMassage(error, isi, res);
   }
 });
+
+user.get("/", async (req, res) => {
+  try {
+    const allUser = await findMany()
+    res.status(200).send({data: allUser})
+  } catch (error) {
+    const isi = "Gagal membuat akun"
+    errorMassage(error, isi, res)
+  }
+})
 
 user.get("/:id", async (req, res) => {
   const userId = parseInt(req.params.id);
