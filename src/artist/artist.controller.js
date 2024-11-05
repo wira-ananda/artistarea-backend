@@ -25,7 +25,7 @@ artist.post("/register", async (req, res) => {
   }
 });
 
-user.get("/", async (req, res) => {
+artist.get("/", async (req, res) => {
   try {
     const allArtist = await findMany()
     res.status(200).send({data: allArtist})
