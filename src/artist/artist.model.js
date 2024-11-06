@@ -31,6 +31,7 @@ const createNew = {
         name,
         bio,
         website,
+        password
       },
     });
 
