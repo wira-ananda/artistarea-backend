@@ -5,7 +5,7 @@ const errorMassage = (error, isi, res) => {
 
 const existingCheck = {
   existingArtist: async (artistData, res, findUnique, create) => {
-    const { name, bio, website } = artistData;
+    const { name, bio, website, password } = artistData;
     const existingArtistName = await findUnique({
       where: { name },
     });
@@ -22,7 +22,7 @@ const artistExist = existingCheck.existingArtist;
 
 const createNew = {
   newartist: async (artistData, res, createartist) => {
-    const { name, bio, website } = artistData;
+    const { name, bio, website, password } = artistData;
     if (!name) {
       return res.status(400).send({ message: "Artistname is required" });
     }
