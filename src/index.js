@@ -35,11 +35,11 @@ app.get("/", (req, res) => {
   res.send("Welcome to the API");
 });
 
-app.use("/user222294", user);
-app.use("/artist222294", artist);
-app.use("/artwork222294", artwork);
-app.use("/like222294", like);
-app.use("/follow222294", follow);
+app.use("/user", user);
+app.use("/artist", artist);
+app.use("/artwork", artwork);
+app.use("/like", like);
+app.use("/follow", follow);
 
 // Error handling
 app.use((err, req, res, next) => {
