@@ -13,9 +13,9 @@ const {
   searchArtworkById,
 } = require("./artwork.model");
 
-const artwork = express.Router();
+const artwork222294 = express.Router();
 
-artwork.post("/post", async (req, res) => {
+artwork222294.post("/post", async (req, res) => {
   try {
     await createArtwork(req.body, res, create);
   } catch (error) {
@@ -24,50 +24,50 @@ artwork.post("/post", async (req, res) => {
   }
 });
 
-artwork.get("/", async (req, res) => {
+artwork222294.get("/", async (req, res) => {
   try {
-    const allArtworks = await findMany({
+    const allArtworks222294 = await findMany({
       include: {
-        artist: true, 
+        artist: true,
         likes: true,
         _count: {
-          select: { likes: true }, 
+          select: { likes: true },
         },
       },
     });
 
-    res.status(200).send({ data: allArtworks });
+    res.status(200).send({ data: allArtworks222294 });
   } catch (error) {
     const isi = "Failed to fetch artworks";
     errorMassage(error, isi, res);
   }
 });
 
-artwork.get("/:id", async (req, res) => {
-  const artworkId = parseInt(req.params.id);
+artwork222294.get("/:id", async (req, res) => {
+  const artworkId222294 = parseInt(req.params.id);
 
-  if (isNaN(artworkId)) {
+  if (isNaN(artworkId222294)) {
     return res.status(400).send({ message: "Invalid artwork ID" });
   }
 
   try {
-    await searchArtworkById(req, res, artworkId, findUnique, count);
+    await searchArtworkById(req, res, artworkId222294, findUnique, count);
   } catch (error) {
     const isi = "Failed to fetch artwork";
     errorMassage(error, isi, res);
   }
 });
 
-artwork.delete("/:id", async (req, res) => {
-  const artworkId = parseInt(req.params.id);
+artwork222294.delete("/:id", async (req, res) => {
+  const artworkId222294 = parseInt(req.params.id);
   const key = "delete";
 
-  if (isNaN(artworkId)) {
+  if (isNaN(artworkId222294)) {
     return res.status(400).send({ message: "Invalid artwork ID" });
   }
 
   try {
-    await searchArtworkById(req, res, artworkId, deleting, key);
+    await searchArtworkById(req, res, artworkId222294, deleting, key);
     res.status(200).send({ message: "Artwork deleted successfully" });
   } catch (error) {
     const isi = "Failed to delete artwork";
@@ -75,16 +75,16 @@ artwork.delete("/:id", async (req, res) => {
   }
 });
 
-artwork.patch("/:id", async (req, res) => {
-  const artworkId = parseInt(req.params.id);
+artwork222294.patch("/:id", async (req, res) => {
+  const artworkId222294 = parseInt(req.params.id);
   const key = "patch";
 
-  if (isNaN(artworkId)) {
+  if (isNaN(artworkId222294)) {
     return res.status(400).send({ message: "Invalid artwork ID" });
   }
 
   try {
-    await searchArtworkById(req, res, artworkId, update, key);
+    await searchArtworkById(req, res, artworkId222294, update, key);
     res.status(200).send({ message: "Artwork updated successfully" });
   } catch (error) {
     const isi = "Failed to update artwork";
@@ -92,17 +92,16 @@ artwork.patch("/:id", async (req, res) => {
   }
 });
 
-artwork.put("/:id", async (req, res) => {
-  const artworkId = parseInt(req.params.id);
+artwork222294.put("/:id", async (req, res) => {
+  const artworkId222294 = parseInt(req.params.id);
   const key = "put";
 
-  // Validasi ID artwork
-  if (isNaN(artworkId)) {
+  if (isNaN(artworkId222294)) {
     return res.status(400).send({ message: "Invalid artwork ID" });
   }
 
   try {
-    await searchArtworkById(req, res, artworkId, update, key);
+    await searchArtworkById(req, res, artworkId222294, update, key);
     res.status(200).send({ message: "Artwork replaced successfully" });
   } catch (error) {
     const isi = "Failed to replace artwork";
@@ -110,4 +109,4 @@ artwork.put("/:id", async (req, res) => {
   }
 });
 
-module.exports = artwork;
+module.exports = artwork222294;

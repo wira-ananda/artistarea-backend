@@ -14,7 +14,7 @@ const {
   errorMassage,
 } = require("./artist.model");
 
-const artist = express.Router(); 
+const artist = express.Router();
 
 artist.post("/register", async (req, res) => {
   try {
@@ -27,19 +27,19 @@ artist.post("/register", async (req, res) => {
 
 artist.get("/", async (req, res) => {
   try {
-    const allArtist = await findMany()
-    res.status(200).send({data: allArtist})
+    const allArtist222294 = await findMany();
+    res.status(200).send({ data: allArtist222294 });
   } catch (error) {
-    const isi = "Gagal membuat akun"
-    errorMassage(error, isi, res)
+    const isi = "Gagal membuat akun";
+    errorMassage(error, isi, res);
   }
-})
+});
 
 artist.get("/:id", async (req, res) => {
-  const artistId = parseInt(req.params.id);
+  const artistId222294 = parseInt(req.params.id);
 
   try {
-    await searchArtistById(req, res, artistId, findUnique, count);
+    await searchArtistById(req, res, artistId222294, findUnique, count);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
@@ -47,11 +47,11 @@ artist.get("/:id", async (req, res) => {
 });
 
 artist.delete("/:id", async (req, res) => {
-  const artistId = parseInt(req.params.id);
+  const artistId222294 = parseInt(req.params.id);
   const key = "delete";
 
   try {
-    await searchArtistById(req, res, artistId, deleting, key);
+    await searchArtistById(req, res, artistId222294, deleting, key);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
@@ -59,11 +59,11 @@ artist.delete("/:id", async (req, res) => {
 });
 
 artist.patch("/:id", async (req, res) => {
-  const artistId = parseInt(req.params.id);
+  const artistId222294 = parseInt(req.params.id);
   const key = "patch";
 
   try {
-    await searchArtistById(req, res, artistId, update, key);
+    await searchArtistById(req, res, artistId222294, update, key);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
@@ -71,11 +71,11 @@ artist.patch("/:id", async (req, res) => {
 });
 
 artist.put("/:id", async (req, res) => {
-  const artistId = parseInt(req.params.id);
+  const artistId222294 = parseInt(req.params.id);
   const key = "put";
 
   try {
-    await searchArtistById(req, res, artistId, update, key);
+    await searchArtistById(req, res, artistId222294, update, key);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);

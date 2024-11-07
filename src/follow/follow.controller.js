@@ -13,27 +13,27 @@ const {
   searchFollowById,
 } = require("./follow.model");
 
-const follow = express.Router();
+const follow222294 = express.Router();
 
-follow.post("/adding", async (req, res) => {
+follow222294.post("/adding", async (req, res) => {
   try {
     await alreadyFollow(req.body, res, findFirst, create);
   } catch (error) {
-    const isi = "Failed to following";
+    const isi = "Failed to follow";
     errorMassage(error, isi, res);
   }
 });
 
-follow.delete("/:id", async (req, res) => {
-  const followId = parseInt(req.params.id);
+follow222294.delete("/:id", async (req, res) => {
+  const followId222294 = parseInt(req.params.id);
   const response = "delete";
 
   try {
-    await searchFollowById(req, res, followId, deleting, response);
+    await searchFollowById(req, res, followId222294, deleting, response);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
   }
 });
 
-module.exports = follow;
+module.exports = follow222294;
