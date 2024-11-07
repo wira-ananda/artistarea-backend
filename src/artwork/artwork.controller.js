@@ -15,7 +15,6 @@ const {
 
 const artwork = express.Router();
 
-// Endpoint untuk membuat artwork
 artwork.post("/post", async (req, res) => {
   try {
     await createArtwork(req.body, res, create);
@@ -25,7 +24,6 @@ artwork.post("/post", async (req, res) => {
   }
 });
 
-// Endpoint untuk mendapatkan semua artwork
 artwork.get("/", async (req, res) => {
   try {
     const allArtworks = await findMany({
@@ -45,11 +43,9 @@ artwork.get("/", async (req, res) => {
   }
 });
 
-// Endpoint untuk mendapatkan artwork berdasarkan ID
 artwork.get("/:id", async (req, res) => {
   const artworkId = parseInt(req.params.id);
 
-  // Validasi ID artwork
   if (isNaN(artworkId)) {
     return res.status(400).send({ message: "Invalid artwork ID" });
   }
@@ -62,12 +58,10 @@ artwork.get("/:id", async (req, res) => {
   }
 });
 
-// Endpoint untuk menghapus artwork berdasarkan ID
 artwork.delete("/:id", async (req, res) => {
   const artworkId = parseInt(req.params.id);
   const key = "delete";
 
-  // Validasi ID artwork
   if (isNaN(artworkId)) {
     return res.status(400).send({ message: "Invalid artwork ID" });
   }
@@ -81,12 +75,10 @@ artwork.delete("/:id", async (req, res) => {
   }
 });
 
-// Endpoint untuk memperbarui artwork berdasarkan ID
 artwork.patch("/:id", async (req, res) => {
   const artworkId = parseInt(req.params.id);
   const key = "patch";
 
-  // Validasi ID artwork
   if (isNaN(artworkId)) {
     return res.status(400).send({ message: "Invalid artwork ID" });
   }
@@ -100,7 +92,6 @@ artwork.patch("/:id", async (req, res) => {
   }
 });
 
-// Endpoint untuk mengganti artwork berdasarkan ID
 artwork.put("/:id", async (req, res) => {
   const artworkId = parseInt(req.params.id);
   const key = "put";

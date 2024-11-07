@@ -7,68 +7,68 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        Int       @id @default(autoincrement())
-  name      String    @unique
-  email     String    @unique
-  password  String    @unique
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  follows   Follow[] // Relasi dengan seniman yang diikuti
-  likes     Like[] // Relasi dengan karya yang disukai
+model User222294 {
+  id222294        Int       @id @default(autoincrement())
+  name222294      String    @unique
+  email222294     String    @unique
+  password222294  String    @unique
+  createdAt222294 DateTime  @default(now())
+  updatedAt222294 DateTime  @updatedAt
+  follows222294   Follow222294[] // Relasi dengan seniman yang diikuti
+  likes222294     Like222294[] // Relasi dengan karya yang disukai
 }
 
-model Artist {
-  id        Int       @id @default(autoincrement())
-  name      String    @unique
-  password  String    @unique
-  bio       String?
-  website   String?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  artworks  Artwork[] // Relasi dengan karya seni yang dimiliki
-  followers Follow[] // Relasi dengan user yang mengikuti
+model Artist222294 {
+  id222294        Int       @id @default(autoincrement())
+  name222294      String    @unique
+  password222294  String    @unique
+  bio222294       String?
+  website222294   String?
+  createdAt222294 DateTime  @default(now())
+  updatedAt222294 DateTime  @updatedAt
+  artworks222294  Artwork222294[] // Relasi dengan karya seni yang dimiliki
+  followers222294 Follow222294[] // Relasi dengan user yang mengikuti
 }
 
-model Artwork {
-  id          Int       @id @default(autoincrement())
-  title       String
-  description String?
-  imageUrl    String
-  price       Float
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  artist      Artist    @relation(fields: [artistId], references: [id])
-  artistId    Int
-  likes       Like[] // Relasi dengan like
-  insights    Insight[] // Relasi dengan insight
+model Artwork222294 {
+  id222294          Int       @id @default(autoincrement())
+  title222294       String
+  description222294 String?
+  imageUrl222294    String
+  price222294       Float
+  createdAt222294   DateTime  @default(now())
+  updatedAt222294   DateTime  @updatedAt
+  artist222294      Artist222294    @relation(fields: [artistId222294], references: [id222294])
+  artistId222294    Int
+  likes222294       Like222294[] // Relasi dengan like
+  insights222294    Insight222294[] // Relasi dengan insight
 }
 
-model Like {
-  id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-  artwork   Artwork  @relation(fields: [artworkId], references: [id])
-  artworkId Int
-  createdAt DateTime @default(now())
+model Like222294 {
+  id222294        Int      @id @default(autoincrement())
+  user222294      User222294     @relation(fields: [userId222294], references: [id222294])
+  userId222294    Int
+  artwork222294   Artwork222294  @relation(fields: [artworkId222294], references: [id222294])
+  artworkId222294 Int
+  createdAt222294 DateTime @default(now())
 }
 
-model Follow {
-  id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-  artist    Artist   @relation(fields: [artistId], references: [id])
-  artistId  Int
-  createdAt DateTime @default(now())
+model Follow222294 {
+  id222294        Int      @id @default(autoincrement())
+  user222294      User222294     @relation(fields: [userId222294], references: [id222294])
+  userId222294    Int
+  artist222294    Artist222294   @relation(fields: [artistId222294], references: [id222294])
+  artistId222294  Int
+  createdAt222294 DateTime @default(now())
 }
 
-model Insight {
-  id        Int      @id @default(autoincrement())
-  artwork   Artwork  @relation(fields: [artworkId], references: [id])
-  artworkId Int
-  views     Int      @default(0)
-  likes     Int      @default(0)
-  shares    Int      @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Insight222294 {
+  id222294        Int      @id @default(autoincrement())
+  artwork222294   Artwork222294  @relation(fields: [artworkId222294], references: [id222294])
+  artworkId222294 Int
+  views222294     Int      @default(0)
+  likes222294     Int      @default(0)
+  shares222294    Int      @default(0)
+  createdAt222294 DateTime @default(now())
+  updatedAt222294 DateTime @updatedAt
 }
