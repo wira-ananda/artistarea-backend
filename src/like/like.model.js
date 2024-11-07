@@ -5,12 +5,12 @@ const errorMassage = (error, isi, res) => {
 
 const existingCheck = {
   existingLike: async (likeData, res, findFirst, create) => {
-    const { likeId, artworkId } = likeData;
-    const existingLike = await findFirst({
-      where: { likeId: likeId, artworkId: artworkId },
+    const { likeId222294, artworkId222294 } = likeData;
+    const existingLike222294 = await findFirst({
+      where: { likeId222294: likeId222294, artworkId222294: artworkId222294 },
     });
 
-    if (existingLike) {
+    if (existingLike222294) {
       return res.status(400).send({ message: "U already like this one" });
     } else {
       await addingLike(likeData, res, create);
@@ -22,25 +22,25 @@ const alreadyLike = existingCheck.existingLike;
 
 const createNew = {
   newLike: async (likeData, res, create) => {
-    const { likeId, artworkId } = likeData;
+    const { likeId222294, artworkId222294 } = likeData;
 
-    if (!likeId || !artworkId) {
+    if (!likeId222294 || !artworkId222294) {
       return res.status(400).send({ message: "All fields are required" });
     }
 
-    const newLike = await create({
+    const newLike222294 = await create({
       data: {
-        like: {
-          connect: { id: likeId },
+        like222294: {
+          connect: { id222294: likeId222294 },
         },
-        artwork: {
-          connect: { id: artworkId },
+        artwork222294: {
+          connect: { id222294: artworkId222294 },
         },
       },
     });
 
     res.status(201).send({
-      data: newLike,
+      data: newLike222294,
       message: "Like added successfully!",
     });
   },
@@ -49,18 +49,17 @@ const createNew = {
 const addingLike = createNew.newLike;
 
 const searching = {
-  searchLikeById: async (req, res, likeId, findLikeMethod, key) => {
-    let like = await findLikeMethod({ where: { id: likeId } });
+  searchLikeById: async (req, res, likeId222294, findLikeMethod, key) => {
+    let like222294 = await findLikeMethod({ where: { id222294: likeId222294 } });
     
-
-    if (!like) {
+    if (!like222294) {
       return res.status(404).send({ message: "like not found" });
     }
 
     if (key === "delete") {
       res.status(200).send({ message: "Delete successfully" });
     } else {
-      res.status(200).send({ data: like });
+      res.status(200).send({ data: like222294 });
     }
   },
 };

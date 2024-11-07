@@ -5,9 +5,9 @@ const errorMassage = (error, isi, res) => {
 
 const existingCheck = {
   existingFollow: async (followData, res, findFirst, create) => {
-    const { userId, artistId } = followData;
+    const { userId222294, artistId222294 } = followData;
     const existingFollow = await findFirst({
-      where: { userId: userId, artistId: artistId },
+      where: { userId222294: userId222294, artistId222294: artistId222294 },
     });
 
     if (existingFollow) {
@@ -22,19 +22,19 @@ const alreadyFollow = existingCheck.existingFollow;
 
 const createNew = {
   newFollow: async (followData, res, create) => {
-    const { userId, artistId } = followData;
+    const { userId222294, artistId222294 } = followData;
 
-    if (!userId || !artistId) {
+    if (!userId222294 || !artistId222294) {
       return res.status(400).send({ message: "All fields are required" });
     }
 
     const newFollow = await create({
       data: {
-        user: {
-          connect: { id: userId },
+        user222294: {
+          connect: { id222294: userId222294 },
         },
-        artist: {
-          connect: { id: artistId },
+        artist222294: {
+          connect: { id222294: artistId222294 },
         },
       },
     });
@@ -49,21 +49,21 @@ const createNew = {
 const addingFollow = createNew.newFollow;
 
 const searching = {
-  searchFollowById: async (req, res, followId, findFollowMethod, key) => {
-    let follow =  await findFollowMethod({ where: { id: followId } });
+  searchFollowById: async (req, res, followId222294, findFollowMethod, key) => {
+    let follow222294 = await findFollowMethod({ where: { id222294: followId222294 } });
 
     if (key === "delete") {
-      follow = await findFollowMethod({ where: { id: followId } });
+      follow222294 = await findFollowMethod({ where: { id222294: followId222294 } });
     }
 
-    if (!follow) {
+    if (!follow222294) {
       return res.status(404).send({ message: "follow not found" });
     }
 
     if (key === "delete") {
       res.status(200).send({ message: "Delete successfully" });
     } else {
-      res.status(200).send({ data: follow });
+      res.status(200).send({ data: follow222294 });
     }
   },
 };

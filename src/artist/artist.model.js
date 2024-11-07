@@ -5,12 +5,12 @@ const errorMassage = (error, isi, res) => {
 
 const existingCheck = {
   existingArtist: async (artistData, res, findUnique, create) => {
-    const { name, bio, website, password } = artistData;
-    const existingArtistName = await findUnique({
-      where: { name },
+    const { name222294, bio222294, website222294, password222294 } = artistData;
+    const existingArtistName222294 = await findUnique({
+      where: { name222294 },
     });
 
-    if (existingArtistName) {
+    if (existingArtistName222294) {
       return res.status(400).send({ message: "Artistname already exists" });
     } else {
       await createArtist(artistData, res, create);
@@ -22,66 +22,65 @@ const artistExist = existingCheck.existingArtist;
 
 const createNew = {
   newartist: async (artistData, res, createartist) => {
-    const { name, bio, website, password } = artistData;
-    if (!name) {
+    const { name222294, bio222294, website222294, password222294 } = artistData;
+    if (!name222294) {
       return res.status(400).send({ message: "Artistname is required" });
     }
-    const newArtist = await createartist({
+    const newArtist222294 = await createartist({
       data: {
-        name,
-        bio,
-        website,
-        password
+        name222294,
+        bio222294,
+        website222294,
+        password222294,
       },
     });
 
     res
       .status(201)
-      .send({ data: newArtist, message: "Artist created successfully!" });
+      .send({ data: newArtist222294, message: "Artist created successfully!" });
   },
 };
 
 const createArtist = createNew.newartist;
 
 const searching = {
-  searchartistById: async (req, res, artistId, findArtistMethod, countFollowers, key) => {
-    let artist;
+  searchartistById: async (req, res, artistId222294, findArtistMethod, countFollowers, key) => {
+    let artist222294;
 
     if (key === "patch") {
-      const data = req.body;
-      artist = await findArtistMethod({
-        where: { id: artistId },
-        data: data,
+      const data222294 = req.body;
+      artist222294 = await findArtistMethod({
+        where: { id222294: artistId222294 },
+        data: data222294,
       });
     } else if (key === "put") {
-      const { name, bio, website } = req.body;
-      artist = await findArtistMethod({
-        where: { id: artistId },
-        data: { name, bio, website },
+      const { name222294, bio222294, website222294 } = req.body;
+      artist222294 = await findArtistMethod({
+        where: { id222294: artistId222294 },
+        data: { name222294, bio222294, website222294 },
       });
     } else {
-      artist = await findArtistMethod({
-        where: { id: artistId },
-        include: { followers: true },
+      artist222294 = await findArtistMethod({
+        where: { id222294: artistId222294 },
+        include: { followers222294: true },
       });
     }
 
-    if (!artist) {
+    if (!artist222294) {
       return res.status(404).send({ message: "artist not found" });
     }
 
-    const followersCount = await countFollowers({
-      where: { artistId: artistId }
+    const followersCount222294 = await countFollowers({
+      where: { artistId222294: artistId222294 },
     });
 
     if (key === "delete") {
       res.status(200).send({ message: "Delete successfully" });
     } else {
-      res.status(200).send({ data: artist, followersCount });
+      res.status(200).send({ data: artist222294, followersCount222294 });
     }
   },
 };
-
 
 const searchArtistById = searching.searchartistById;
 

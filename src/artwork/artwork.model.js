@@ -5,20 +5,20 @@ const errorMassage = (error, isi, res) => {
 
 const createNew = {
   newArtwork: async (artworkData, res, create) => {
-    const { title, description, imageUrl, price, artistId } = artworkData;
+    const { title222294, description222294, imageUrl222294, price222294, artistId222294 } = artworkData;
 
-    if (!title || !imageUrl || !price || !artistId) {
+    if (!title222294 || !imageUrl222294 || !price222294 || !artistId222294) {
       return res.status(400).send({ message: "All fields are required" });
     }
 
     const newArtwork = await create({
       data: {
-        title,
-        description,
-        imageUrl,
-        price,
-        artist: {
-          connect: { id: artistId },
+        title222294,
+        description222294,
+        imageUrl222294,
+        price222294,
+        artist222294: {
+          connect: { id222294: artistId222294 },
         },
       },
     });
@@ -33,43 +33,43 @@ const createNew = {
 const createArtwork = createNew.newArtwork;
 
 const searching = {
-  searchArtworkById: async (req, res, artworkId, findArtworkMethod, countArtworkLikes, key) => {
-    let artwork;
+  searchArtworkById: async (req, res, artworkId222294, findArtworkMethod, countArtworkLikes, key) => {
+    let artwork222294;
 
     if (key === "patch") {
-      const data = req.body;
-      artwork = await findArtworkMethod({
-        where: { id: artworkId },
-        data: data,
+      const data222294 = req.body;
+      artwork222294 = await findArtworkMethod({
+        where: { id222294: artworkId222294 },
+        data: data222294,
       });
     } else if (key === "put") {
-      const { name, bio, website } = req.body;
-      artwork = await findArtworkMethod({
-        where: { id: artworkId },
-        data: { name, bio, website },
+      const { name222294, bio222294, website222294 } = req.body;
+      artwork222294 = await findArtworkMethod({
+        where: { id222294: artworkId222294 },
+        data: { name222294, bio222294, website222294 },
       });
     } else {
-      artwork = await findArtworkMethod({
-        where: { id: artworkId },
+      artwork222294 = await findArtworkMethod({
+        where: { id222294: artworkId222294 },
         include: {
-          artist: true,
-          likes: true,
-        }
+          artist222294: true,
+          likes222294: true,
+        },
       });
     }
 
-    const likeCount = await countArtworkLikes({
-      where: {artworkId: artworkId}
-    })
+    const likeCount222294 = await countArtworkLikes({
+      where: { artworkId222294: artworkId222294 },
+    });
     
-    if (!artwork) {
+    if (!artwork222294) {
       return res.status(404).send({ message: "artwork not found" });
     }
 
     if (key === "delete") {
       res.status(200).send({ message: "Delete successfully" });
     } else {
-      res.status(200).send({ data: artwork, likeCount });
+      res.status(200).send({ data: artwork222294, likeCount222294 });
     }
   },
 };
