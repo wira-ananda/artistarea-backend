@@ -10,7 +10,7 @@ const {
   errorMassage,
   alreadyLike,
   searchLikeById,
-} = require("./like.model");
+} = require("./like.service");
 
 const like = express.Router();
 

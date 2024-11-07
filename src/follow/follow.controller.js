@@ -11,7 +11,7 @@ const {
   errorMassage,
   alreadyFollow,
   searchFollowById,
-} = require("./follow.model");
+} = require("./follow.service");
 
 const follow = express.Router();
 

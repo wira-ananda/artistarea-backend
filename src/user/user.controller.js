@@ -11,7 +11,7 @@ const {
   createUser,
   searchUserById,
   errorMassage,
-} = require("./user.model");
+} = require("./user.service");
 
 const user = express.Router();
 

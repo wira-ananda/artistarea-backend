@@ -11,7 +11,7 @@ const {
   createArtwork,
   errorMassage,
   searchArtworkById,
-} = require("./artwork.model");
+} = require("./artwork.service");
 
 const artwork = express.Router();
 

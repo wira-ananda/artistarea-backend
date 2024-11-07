@@ -12,7 +12,7 @@ const {
   createArtist,
   searchArtistById,
   errorMassage,
-} = require("./artist.model");
+} = require("./artist.service");
 
 const artist = express.Router(); 
 
