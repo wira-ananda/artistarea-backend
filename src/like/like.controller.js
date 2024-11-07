@@ -12,38 +12,41 @@ const {
   searchLikeById,
 } = require("./like.model");
 
-const like222294 = express.Router();
+const like = express.Router();
 
-like222294.post("/adding", async (req, res) => {
+like.post("/adding", async (req, res) => {
   try {
     await alreadyLike(req.body, res, findFirst, create);
   } catch (error) {
-    const isi = "Failed to add like";
+    const isi = "Failed to adding like";
     errorMassage(error, isi, res);
   }
 });
 
-like222294.delete("/:id", async (req, res) => {
-  const likeId222294 = parseInt(req.params.id);
+like.delete("/:id", async (req, res) => {
+  const likeId = parseInt(req.params.id);
   const response = "delete";
 
   try {
-    await searchLikeById(req, res, likeId222294, deleting, response);
+    await searchLikeById(req, res, likeId, deleting, response);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
   }
 });
 
-like222294.get("/:id", async (req, res) => {
-  const likeId222294 = parseInt(req.params.id);
+
+like.get("/:id", async (req, res) => {
+  const likeId = parseInt(req.params.id);
 
   try {
-    await searchLikeById(req, res, likeId222294, findUnique);
+    await searchLikeById(req, res, likeId, findUnique);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
   }
 });
 
-module.exports = like222294;
+
+
+module.exports = like;
