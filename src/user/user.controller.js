@@ -13,9 +13,9 @@ const {
   errorMassage,
 } = require("./user.model");
 
-const user222294 = express.Router();
+const user = express.Router();
 
-user222294.post("/register", async (req, res) => {
+user.post("/register", async (req, res) => {
   try {
     await userExist(req.body, res, findUnique, create);
   } catch (error) {
@@ -24,61 +24,61 @@ user222294.post("/register", async (req, res) => {
   }
 });
 
-user222294.get("/", async (req, res) => {
+user.get("/", async (req, res) => {
   try {
-    const allUser = await findMany();
-    res.status(200).send({ data: allUser });
+    const allUser = await findMany()
+    res.status(200).send({data: allUser})
   } catch (error) {
-    const isi = "Gagal membuat akun";
-    errorMassage(error, isi, res);
+    const isi = "Gagal membuat akun"
+    errorMassage(error, isi, res)
   }
-});
+})
 
-user222294.get("/:id", async (req, res) => {
-  const userId222294 = parseInt(req.params.id);
+user.get("/:id", async (req, res) => {
+  const userId = parseInt(req.params.id);
 
   try {
-    await searchUserById(req, res, userId222294, findUnique);
+    await searchUserById(req, res, userId, findUnique);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
   }
 });
 
-user222294.delete("/:id", async (req, res) => {
-  const userId222294 = parseInt(req.params.id);
+user.delete("/:id", async (req, res) => {
+  const userId = parseInt(req.params.id);
   const response = "delete";
 
   try {
-    await searchUserById(req, res, userId222294, deleting, response);
+    await searchUserById(req, res, userId, deleting, response);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
   }
 });
 
-user222294.patch("/:id", async (req, res) => {
-  const userId222294 = parseInt(req.params.id);
+user.patch("/:id", async (req, res) => {
+  const userId = parseInt(req.params.id);
   const key = "patch";
 
   try {
-    await searchUserById(req, res, userId222294, update, key);
+    await searchUserById(req, res, userId, update, key);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
   }
 });
 
-user222294.put("/:id", async (req, res) => {
-  const userId222294 = parseInt(req.params.id);
+user.put("/:id", async (req, res) => {
+  const userId = parseInt(req.params.id);
   const key = "put";
 
   try {
-    await searchUserById(req, res, userId222294, update, key);
+    await searchUserById(req, res, userId, update, key);
   } catch (error) {
     const isi = "Failed";
     errorMassage(error, isi, res);
   }
 });
 
-module.exports = user222294;
+module.exports = user;
