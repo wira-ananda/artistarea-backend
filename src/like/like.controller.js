@@ -7,10 +7,10 @@ const {
 } = require("./like.prisma");
 const {
   addingLike,
-  errorMassage,
   alreadyLike,
   searchLikeById,
 } = require("./like.service");
+const errorMiddleware = require("../errorMiddleware")
 
 const like = express.Router();
 
@@ -18,8 +18,8 @@ like.post("/adding", async (req, res) => {
   try {
     await alreadyLike(req.body, res, findFirst, create);
   } catch (error) {
-    const isi = "Failed to adding like";
-    errorMassage(error, isi, res);
+    const errorMessage = "Failed to adding like";
+    errorMiddleware(error, errorMessage, res);
   }
 });
 
@@ -30,8 +30,8 @@ like.delete("/:id", async (req, res) => {
   try {
     await searchLikeById(req, res, likeId, deleting, response);
   } catch (error) {
-    const isi = "Failed";
-    errorMassage(error, isi, res);
+    const errorMessage = "Failed";
+    errorMiddleware(error, errorMessage, res);
   }
 });
 
@@ -42,8 +42,8 @@ like.get("/:id", async (req, res) => {
   try {
     await searchLikeById(req, res, likeId, findUnique);
   } catch (error) {
-    const isi = "Failed";
-    errorMassage(error, isi, res);
+    const errorMessage = "Failed";
+    errorMiddleware(error, errorMessage, res);
   }
 });
 

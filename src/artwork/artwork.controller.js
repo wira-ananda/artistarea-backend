@@ -9,9 +9,9 @@ const {
 } = require("./artwork.prisma");
 const {
   createArtwork,
-  errorMassage,
   searchArtworkById,
 } = require("./artwork.service");
+const errorMiddleware = require("../errorMiddleware");
 
 const artwork = express.Router();
 
@@ -20,8 +20,8 @@ artwork.post("/post", async (req, res) => {
   try {
     await createArtwork(req.body, res, create);
   } catch (error) {
-    const isi = "Failed to create artwork";
-    errorMassage(error, isi, res);
+    const errorMessage = "Failed to create artwork";
+    errorMiddleware(error, errorMessage, res);
   }
 });
 
@@ -40,8 +40,8 @@ artwork.get("/", async (req, res) => {
 
     res.status(200).send({ data: allArtworks });
   } catch (error) {
-    const isi = "Failed to fetch artworks";
-    errorMassage(error, isi, res);
+    const errorMessage = "Failed to fetch artworks";
+    errorMiddleware(error, errorMessage, res);
   }
 });
 
@@ -57,8 +57,8 @@ artwork.get("/:id", async (req, res) => {
   try {
     await searchArtworkById(req, res, artworkId, findUnique, count);
   } catch (error) {
-    const isi = "Failed to fetch artwork";
-    errorMassage(error, isi, res);
+    const errorMessage = "Failed to fetch artwork";
+    errorMiddleware(error, errorMessage, res);
   }
 });
 
@@ -76,8 +76,8 @@ artwork.delete("/:id", async (req, res) => {
     await searchArtworkById(req, res, artworkId, deleting, key);
     res.status(200).send({ message: "Artwork deleted successfully" });
   } catch (error) {
-    const isi = "Failed to delete artwork";
-    errorMassage(error, isi, res);
+    const errorMessage = "Failed to delete artwork";
+    errorMiddleware(error, errorMessage, res);
   }
 });
 
@@ -95,8 +95,8 @@ artwork.patch("/:id", async (req, res) => {
     await searchArtworkById(req, res, artworkId, update, key);
     res.status(200).send({ message: "Artwork updated successfully" });
   } catch (error) {
-    const isi = "Failed to update artwork";
-    errorMassage(error, isi, res);
+    const errorMessage = "Failed to update artwork";
+    errorMiddleware(error, errorMessage, res);
   }
 });
 
@@ -114,8 +114,8 @@ artwork.put("/:id", async (req, res) => {
     await searchArtworkById(req, res, artworkId, update, key);
     res.status(200).send({ message: "Artwork replaced successfully" });
   } catch (error) {
-    const isi = "Failed to replace artwork";
-    errorMassage(error, isi, res);
+    const errorMessage = "Failed to replace artwork";
+    errorMiddleware(error, errorMessage, res);
   }
 });
 

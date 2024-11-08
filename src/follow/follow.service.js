@@ -1,8 +1,3 @@
-const errorMassage = (error, isi, res) => {
-  console.error(error);
-  res.status(500).send({ error: isi });
-};
-
 const existingCheck = {
   existingFollow: async (followData, res, findFirst, create) => {
     const { userId, artistId } = followData;
@@ -71,7 +66,6 @@ const searching = {
 const searchFollowById = searching.searchFollowById;
 
 module.exports = {
-  errorMassage,
   alreadyFollow,
   addingFollow,
   searchFollowById,

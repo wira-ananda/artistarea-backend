@@ -1,8 +1,3 @@
-const errorMassage = (error, isi, res) => {
-  console.error(error);
-  res.status(500).send({ error: isi });
-};
-
 const existingCheck = {
   existingLike: async (likeData, res, findFirst, create) => {
     const { likeId, artworkId } = likeData;
@@ -67,4 +62,4 @@ const searching = {
 
 const searchLikeById = searching.searchLikeById;
 
-module.exports = { errorMassage, alreadyLike, addingLike, searchLikeById };
+module.exports = { alreadyLike, addingLike, searchLikeById };

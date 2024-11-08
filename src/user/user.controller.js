@@ -11,6 +11,7 @@ const {
   createUser,
   searchUserById
 } = require('./user.service.js');
+const errorMiddleware = require("../errorMiddleware.js");
 
 const user = express.Router();
 
@@ -18,8 +19,8 @@ user.post("/register", async (req, res) => {
   try {
     await userExist(req.body, res, findUnique, create);
   } catch (error) {
-    error.message = "Gagal membuat akun";
-    next(error);
+    const errorMessage = "Gagal membuat akun";
+    errorMiddleware(error, errorMessage, res);
   }
 });
 
@@ -28,8 +29,8 @@ user.get("/", async (req, res) => {
     const allUser = await findMany()
     res.status(200).send({data: allUser})
   } catch (error) {
-   error.message = "Gagal mendapatkan akun"
-    next(error);
+    const errorMessage = "Gagal mendapatkan akun"
+    errorMiddleware(error, errorMessage, res);
   }
 })
 
@@ -39,8 +40,8 @@ user.get("/:id", async (req, res) => {
   try {
     await searchUserById(req, res, userId, findUnique);
   } catch (error) {
-   error.message = "Failed";
-    next(error);
+    const errorMessage = "Failed";
+    errorMiddleware(error, errorMessage, res);
   }
 });
 
@@ -51,8 +52,8 @@ user.delete("/:id", async (req, res) => {
   try {
     await searchUserById(req, res, userId, deleting, response);
   } catch (error) {
-   error.message = "Failed";
-    next(error);
+    const errorMessage = "Failed";
+    errorMiddleware(error, errorMessage, res);
   }
 });
 
@@ -63,8 +64,8 @@ user.patch("/:id", async (req, res) => {
   try {
     await searchUserById(req, res, userId, update, key);
   } catch (error) {
-   error.message = "Failed";
-    next(error);
+    const errorMessage = "Failed";
+    errorMiddleware(error, errorMessage, res);
   }
 });
 
@@ -75,8 +76,8 @@ user.put("/:id", async (req, res) => {
   try {
     await searchUserById(req, res, userId, update, key);
   } catch (error) {
-   error.message = "Failed";
-    next(error);
+    const errorMessage = "Failed";
+    errorMiddleware(error, errorMessage, res);
   }
 });
 
