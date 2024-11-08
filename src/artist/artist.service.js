@@ -1,8 +1,3 @@
-const errorMassage = (error, isi, res) => {
-  console.error(error);
-  res.status(500).send({ error: isi });
-};
-
 const existingCheck = {
   existingArtist: async (artistData, res, findUnique, create) => {
     const { name, bio, website, password } = artistData;
@@ -85,4 +80,4 @@ const searching = {
 
 const searchArtistById = searching.searchartistById;
 
-module.exports = { errorMassage, artistExist, createArtist, searchArtistById };
+module.exports = { artistExist, createArtist, searchArtistById };

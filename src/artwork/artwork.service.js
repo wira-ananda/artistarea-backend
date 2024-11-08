@@ -1,8 +1,3 @@
-const errorMassage = (error, isi, res) => {
-  console.error(error);
-  res.status(500).send({ error: isi });
-};
-
 const createNew = {
   newArtwork: async (artworkData, res, create) => {
     const { title, description, imageUrl, price, artistId } = artworkData;
@@ -76,4 +71,4 @@ const searching = {
 
 const searchArtworkById = searching.searchArtworkById;
 
-module.exports = { createArtwork, errorMassage, searchArtworkById };
+module.exports = { createArtwork, searchArtworkById };

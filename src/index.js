@@ -42,12 +42,6 @@ app.use("/artwork", artwork);
 app.use("/like", like);
 app.use("/follow", follow);
 
-// Error handling
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Something broke!");
-});
-
 app.use(errorMiddleware)
 
 // Start server
