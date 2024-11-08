@@ -81,4 +81,4 @@ const searching = {
 
 const searchUserById = searching.searchUserById;
 
-module.exports = { errorMassage, userExist, createUser, searchUserById };
+module.exports = { userExist, createUser, searchUserById };
