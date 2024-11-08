@@ -29,7 +29,7 @@ user.get("/", async (req, res) => {
     res.status(200).send({data: allUser})
   } catch (error) {
    error.message = "Gagal mendapatkan akun"
-    next(error)
+    next(error);
   }
 })
 

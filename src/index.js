@@ -43,7 +43,12 @@ app.use("/like", like);
 app.use("/follow", follow);
 
 // Error handling
-app.use(errorMiddleware);
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
+
+app.use(errorMiddleware)
 
 // Start server
 app.listen(PORT, () => {
