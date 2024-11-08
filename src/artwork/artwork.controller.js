@@ -20,7 +20,7 @@ artwork.post("/post", async (req, res) => {
   try {
     await createArtwork(req.body, res, create);
   } catch (error) {
-    const errorMessage = "Failed to create artwork";
+    const errorMessage = "Gagal membuat artwork";
     errorMiddleware(error, errorMessage, res);
   }
 });
@@ -40,7 +40,7 @@ artwork.get("/", async (req, res) => {
 
     res.status(200).send({ data: allArtworks });
   } catch (error) {
-    const errorMessage = "Failed to fetch artworks";
+    const errorMessage = "Gagal mengambil daftar artwork";
     errorMiddleware(error, errorMessage, res);
   }
 });
@@ -51,13 +51,13 @@ artwork.get("/:id", async (req, res) => {
 
   // Validasi ID artwork
   if (isNaN(artworkId)) {
-    return res.status(400).send({ message: "Invalid artwork ID" });
+    return res.status(400).send({ message: "ID artwork tidak valid" });
   }
 
   try {
     await searchArtworkById(req, res, artworkId, findUnique, count);
   } catch (error) {
-    const errorMessage = "Failed to fetch artwork";
+    const errorMessage = "Gagal mengambil artwork berdasarkan ID";
     errorMiddleware(error, errorMessage, res);
   }
 });
@@ -69,14 +69,14 @@ artwork.delete("/:id", async (req, res) => {
 
   // Validasi ID artwork
   if (isNaN(artworkId)) {
-    return res.status(400).send({ message: "Invalid artwork ID" });
+    return res.status(400).send({ message: "ID artwork tidak valid" });
   }
 
   try {
     await searchArtworkById(req, res, artworkId, deleting, key);
-    res.status(200).send({ message: "Artwork deleted successfully" });
+    res.status(200).send({ message: "Artwork berhasil dihapus" });
   } catch (error) {
-    const errorMessage = "Failed to delete artwork";
+    const errorMessage = "Gagal menghapus artwork";
     errorMiddleware(error, errorMessage, res);
   }
 });
@@ -88,14 +88,14 @@ artwork.patch("/:id", async (req, res) => {
 
   // Validasi ID artwork
   if (isNaN(artworkId)) {
-    return res.status(400).send({ message: "Invalid artwork ID" });
+    return res.status(400).send({ message: "ID artwork tidak valid" });
   }
 
   try {
     await searchArtworkById(req, res, artworkId, update, key);
-    res.status(200).send({ message: "Artwork updated successfully" });
+    res.status(200).send({ message: "Artwork berhasil diperbarui" });
   } catch (error) {
-    const errorMessage = "Failed to update artwork";
+    const errorMessage = "Gagal memperbarui artwork";
     errorMiddleware(error, errorMessage, res);
   }
 });
@@ -107,14 +107,14 @@ artwork.put("/:id", async (req, res) => {
 
   // Validasi ID artwork
   if (isNaN(artworkId)) {
-    return res.status(400).send({ message: "Invalid artwork ID" });
+    return res.status(400).send({ message: "ID artwork tidak valid" });
   }
 
   try {
     await searchArtworkById(req, res, artworkId, update, key);
-    res.status(200).send({ message: "Artwork replaced successfully" });
+    res.status(200).send({ message: "Artwork berhasil diganti" });
   } catch (error) {
-    const errorMessage = "Failed to replace artwork";
+    const errorMessage = "Gagal mengganti artwork";
     errorMiddleware(error, errorMessage, res);
   }
 });
