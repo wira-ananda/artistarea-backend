@@ -1,8 +1,3 @@
-const errorMassage = (error, isi, res) => {
-  console.error(error);
-  res.status(500).send({ error: isi });
-};
-
 const existingCheck = {
   existingUser: async (userData, res, findUnique, create) => {
     const { name, email, password } = userData;

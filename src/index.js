@@ -7,6 +7,7 @@ const artist = require("./artist/artist.controller");
 const artwork = require("./artwork/artwork.controller");
 const like = require("./like/like.controller");
 const follow = require("./follow/follow.controller");
+const errorMiddleware = require("./errorMiddleware")
 
 const app = express();
 const PORT = process.env.PORT || 2000;
@@ -42,10 +43,7 @@ app.use("/like", like);
 app.use("/follow", follow);
 
 // Error handling
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Something broke!");
-});
+app.use(errorMiddleware);
 
 // Start server
 app.listen(PORT, () => {
