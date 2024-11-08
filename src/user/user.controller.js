@@ -9,9 +9,8 @@ const {
 const {
   userExist,
   createUser,
-  searchUserById,
-  errorMassage,
-} = require("./user.service");
+  searchUserById
+} = require('./user.service.js');
 
 const user = express.Router();
 
@@ -19,8 +18,8 @@ user.post("/register", async (req, res) => {
   try {
     await userExist(req.body, res, findUnique, create);
   } catch (error) {
-    const isi = "Gagal membuat akun";
-    errorMassage(error, isi, res);
+    error.message = "Gagal membuat akun";
+    next(error);
   }
 });
 
@@ -29,8 +28,8 @@ user.get("/", async (req, res) => {
     const allUser = await findMany()
     res.status(200).send({data: allUser})
   } catch (error) {
-    const isi = "Gagal membuat akun"
-    errorMassage(error, isi, res)
+   error.message = "Gagal mendapatkan akun"
+    next(error)
   }
 })
 
@@ -40,8 +39,8 @@ user.get("/:id", async (req, res) => {
   try {
     await searchUserById(req, res, userId, findUnique);
   } catch (error) {
-    const isi = "Failed";
-    errorMassage(error, isi, res);
+   error.message = "Failed";
+    next(error);
   }
 });
 
@@ -52,8 +51,8 @@ user.delete("/:id", async (req, res) => {
   try {
     await searchUserById(req, res, userId, deleting, response);
   } catch (error) {
-    const isi = "Failed";
-    errorMassage(error, isi, res);
+   error.message = "Failed";
+    next(error);
   }
 });
 
@@ -64,8 +63,8 @@ user.patch("/:id", async (req, res) => {
   try {
     await searchUserById(req, res, userId, update, key);
   } catch (error) {
-    const isi = "Failed";
-    errorMassage(error, isi, res);
+   error.message = "Failed";
+    next(error);
   }
 });
 
@@ -76,8 +75,8 @@ user.put("/:id", async (req, res) => {
   try {
     await searchUserById(req, res, userId, update, key);
   } catch (error) {
-    const isi = "Failed";
-    errorMassage(error, isi, res);
+   error.message = "Failed";
+    next(error);
   }
 });
 
