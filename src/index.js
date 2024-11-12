@@ -12,14 +12,12 @@ const errorMiddleware = require("./errorMiddleware")
 const app = express();
 const PORT = process.env.PORT || 2000;
 
-// Middleware CORS
 app.use(cors({
-  origin: "*", // Sesuaikan dengan URL frontend Anda atau gunakan "*" untuk mengizinkan semua origin
+  origin: "*",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true, // Sesuaikan jika Anda menggunakan cookie
+  credentials: true,
 }));
 
-// Middleware untuk Content Security Policy (CSP)
 app.use((req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
@@ -28,10 +26,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Middleware lainnya
 app.use(bodyParser.json());
 
-// Routes
 app.get("/", (req, res) => {
   res.send("Welcome to the API");
 });
@@ -44,7 +40,6 @@ app.use("/follow", follow);
 
 app.use(errorMiddleware)
 
-// Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
