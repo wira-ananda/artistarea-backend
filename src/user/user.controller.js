@@ -7,25 +7,22 @@ const {
   update,
 } = require("./user.prisma");
 const {
-  userExist,
-  createUser,
+  validateAndCreate,
   searchUserById,
 } = require("./user.service.js");
 const errorMiddleware = require("../errorMiddleware.js");
 
 const user = express.Router();
 
-// Endpoint untuk mendaftarkan user baru
 user.post("/register", async (req, res) => {
   try {
-    await userExist(req.body, res, findUnique, create);
+    await validateAndCreate(req.body, res, findUnique, create);
   } catch (error) {
     const errorMessage = "Gagal membuat akun";
     errorMiddleware(error, errorMessage, res);
   }
 });
 
-// Endpoint untuk mendapatkan semua user
 user.get("/", async (req, res) => {
   try {
     const allUser = await findMany();
@@ -36,7 +33,6 @@ user.get("/", async (req, res) => {
   }
 });
 
-// Endpoint untuk mendapatkan user berdasarkan ID
 user.get("/:id", async (req, res) => {
   const userId = parseInt(req.params.id);
 
@@ -54,7 +50,6 @@ user.get("/:id", async (req, res) => {
   }
 });
 
-// Endpoint untuk menghapus user berdasarkan ID
 user.delete("/:id", async (req, res) => {
   const userId = parseInt(req.params.id);
   const response = "delete";
@@ -73,7 +68,6 @@ user.delete("/:id", async (req, res) => {
   }
 });
 
-// Endpoint untuk memperbarui data user berdasarkan ID (partial update)
 user.patch("/:id", async (req, res) => {
   const userId = parseInt(req.params.id);
   const key = "patch";
@@ -92,7 +86,6 @@ user.patch("/:id", async (req, res) => {
   }
 });
 
-// Endpoint untuk mengganti data user berdasarkan ID (full update)
 user.put("/:id", async (req, res) => {
   const userId = parseInt(req.params.id);
   const key = "put";

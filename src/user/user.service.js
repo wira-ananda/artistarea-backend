@@ -1,5 +1,4 @@
-const existingCheck = {
-  existingUser: async (userData, res, findUnique, create) => {
+async function validateAndCreate (userData, res, findUnique, create) {
     const { name, email, password } = userData;
     const existingUserName = await findUnique({
       where: { name },
@@ -18,34 +17,7 @@ const existingCheck = {
     } else {
       await createUser(userData, res, create);
     }
-  },
-};
-
-const userExist = existingCheck.existingUser;
-
-const createNew = {
-  newUser: async (userData, res, createUser) => {
-    const { name, email, password } = userData;
-    if (!name || !email || !password) {
-      return res
-        .status(400)
-        .send({ message: "Username, Email, or Password is required" });
-    }
-    const newUser = await createUser({
-      data: {
-        name,
-        email,
-        password,
-      },
-    });
-
-    res
-      .status(201)
-      .send({ data: newUser, message: "User created successfully!" });
-  },
-};
-
-const createUser = createNew.newUser;
+  };
 
 const searching = {
   searchUserById: async (req, res, userId, findUserMethod, key) => {
@@ -81,4 +53,4 @@ const searching = {
 
 const searchUserById = searching.searchUserById;
 
-module.exports = { userExist, createUser, searchUserById };
+module.exports = { validateAndCreate, searchUserById };
